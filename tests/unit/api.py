@@ -178,7 +178,7 @@ class TestProjectCreateDelete:
     def test_project_delete_hasheadnode(self, db):
         api.group_create('acme-corp')
         api.project_create('anvil-nextgen', 'acme-corp')
-        api.headnode_create('hn-01', 'anvil-nextgen')
+        api.headnode_create('hn-01', 'anvil-nextgen', 'base-headnode')
         with pytest.raises(api.BlockedError):
             api.project_delete('anvil-nextgen')
 
