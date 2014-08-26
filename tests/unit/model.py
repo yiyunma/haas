@@ -95,7 +95,7 @@ class TestSwitch(ModelTest):
 class TestHeadnode(ModelTest):
 
     def sample_obj(self):
-        return Headnode(Project(Group('acme_corp'), 'anvil-nextgen'), 'hn-example')
+        return Headnode(Project(Group('acme_corp'), 'anvil-nextgen'), 'hn-example', 'base-headnode')
 
 
 class TestHnic(ModelTest):

@@ -183,15 +183,17 @@ class Headnode(Model):
     project_id = Column(String, ForeignKey('project.id'), nullable=False)
     project = relationship("Project", backref=backref('headnode', uselist=False))
     dirty = Column(Boolean, nullable=False)
+    base_img = Column(String, nullable=False)
 
     # We need a guaranteed unique name to generate the libvirt machine name
     uuid = Column(String, nullable=False, unique=True)
 
-    def __init__(self, project, label):
+    def __init__(self, project, label, base_img):
         self.project = project
         self.label = label
         self.dirty = True
         self.uuid = str(uuid.uuid1())
+        self.base_img = base_img
 
     @no_dry_run
     def create(self):
@@ -208,7 +210,7 @@ class Headnode(Model):
         # but doesn't seem to on our development setup. XXX.
         call(['rm', '-f', '/var/lib/libvirt/images/%s.img' % self._vmname()])
 
-        check_call(['virt-clone', '-o', 'base-headnode', '-n', self._vmname(), '--auto-clone'])
+        check_call(['virt-clone', '-o', self.base_img, '-n', self._vmname(), '--auto-clone'])
         for hnic in self.hnics:
             hnic.create()
 
