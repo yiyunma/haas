@@ -30,7 +30,7 @@ class TestHeadNode:
         api.group_create('acme-code')
         api.project_create('anvil-nextgen', 'acme-code')
         api.network_create('spider-web', 'anvil-nextgen')
-        api.headnode_create('hn-0', 'anvil-nextgen')
+        api.headnode_create('hn-0', 'anvil-nextgen', 'base-headnode')
         api.headnode_create_hnic('hn-0', 'hnic-0', 'de:ad:be:ef:20:14')
         api.headnode_connect_network('hn-0', 'hnic-0', 'spider-web')
         api.headnode_start('hn-0')
