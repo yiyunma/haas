@@ -665,7 +665,7 @@ class TestHeadnodeCreateDelete:
         api.project_create('anvil-oldtimer', 'acme-code')
         api.headnode_create('hn-0', 'anvil-nextgen', 'base-headnode')
         with pytest.raises(api.DuplicateError):
-            api.headnode_create('hn-0', 'anvil-oldtimer')
+            api.headnode_create('hn-0', 'anvil-oldtimer', 'base-headnode')
 
     @database_only
     def test_headnode_create_second(self, db):
@@ -674,7 +674,7 @@ class TestHeadnodeCreateDelete:
         api.project_create('anvil-nextgen', 'acme-code')
         api.headnode_create('hn-0', 'anvil-nextgen', 'base-headnode')
         with pytest.raises(api.DuplicateError):
-            api.headnode_create('hn-1', 'anvil-nextgen')
+            api.headnode_create('hn-1', 'anvil-nextgen', 'base-headnode')
 
 
     @database_only
@@ -746,7 +746,7 @@ class TestHeadnodeCreateDeleteHnic:
         api.project_create('anvil-nextgen', 'acme-code')
         api.project_create('anvil-oldtimer', 'acme-code')
         api.headnode_create('hn-0', 'anvil-nextgen', 'base-headnode')
-        api.headnode_create('hn-1', 'anvil-oldtimer')
+        api.headnode_create('hn-1', 'anvil-oldtimer', 'base-headnode')
         api.headnode_create_hnic('hn-0', 'hn-0-eth0', 'DE:AD:BE:EF:20:14')
         with pytest.raises(api.NotFoundError):
             api.headnode_delete_hnic('hn-1', 'hn-0-eth0')
@@ -765,8 +765,8 @@ class TestHeadnodeCreateDeleteHnic:
         api.group_create('acme-code')
         api.project_create('anvil-legacy', 'acme-code')
         api.project_create('anvil-nextgen', 'acme-code')
-        api.headnode_create('hn-0', 'anvil-legacy')
-        api.headnode_create('hn-1', 'anvil-nextgen')
+        api.headnode_create('hn-0', 'anvil-legacy', 'base-headnode')
+        api.headnode_create('hn-1', 'anvil-nextgen', 'base-headnode')
         api.headnode_create_hnic('hn-0', 'eth0', 'DE:AD:BE:EF:20:14')
         api.headnode_create_hnic('hn-1', 'eth0', 'DE:AD:BE:EF:20:14')
 
@@ -1389,7 +1389,7 @@ class TestQuery:
         api.group_create('acme-corp')
         api.project_create('anvil-nextgen', 'acme-corp')
         api.network_create('spiderwebs', 'anvil-nextgen')
-        api.headnode_create('BGH', 'anvil-nextgen')
+        api.headnode_create('BGH', 'anvil-nextgen', 'base-headnode')
         api.headnode_create_hnic('BGH', 'eth0', 'DE:AD:BE:EF:20:14')
         api.headnode_create_hnic('BGH', 'wlan0', 'DE:AD:BE:EF:20:15')
         api.headnode_connect_network('BGH', 'eth0', 'spiderwebs')
