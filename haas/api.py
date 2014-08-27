@@ -447,7 +447,7 @@ def node_detach_network(node, nic):
 
 
 @rest_call('PUT', '/headnode/<headnode>')
-def headnode_create(headnode, project):
+def headnode_create(headnode, project, base_img):
     """Create headnode.
 
     If a node with the same name already exists, a DuplicateError will be
@@ -467,7 +467,7 @@ def headnode_create(headnode, project):
         raise DuplicateError('project %s already has a headnode' %
                              (project.label))
 
-    headnode = model.Headnode(project, headnode)
+    headnode = model.Headnode(project, headnode, base_img)
 
     db.add(headnode)
     db.commit()
