@@ -458,6 +458,13 @@ def headnode_create(headnode, project, base_img):
     If the project does not exist, a NotFoundError will be raised.
 
     """
+
+    valid_imgs = cfg.get('headnode', 'base_imgs')
+    valid_imgs.split(',')
+    valid_imgs = [img.strip() for img in valid_imgs]
+
+    if base_img not in valid_imgs:
+        api.BadArgumentError();        
     db = model.Session()
 
     _assert_absent(db, model.Headnode, headnode)
