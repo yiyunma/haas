@@ -22,7 +22,8 @@ active_switch = dell
 # The trunked network interface on the host. This is the nic that the VMs will
 # be bridged to to gain access to their networks.
 trunk_nic = eth0
-base_img = ['img1', 'img2', 'img3', 'img4']
+# Base image to be selected to boot from
+base_img = img1, img2, img3, img4
 
 [client]
 # The http endpoint that the client should talk to 
