@@ -23,7 +23,7 @@ active_switch = dell
 # be bridged to to gain access to their networks.
 trunk_nic = eth0
 # Base image to be selected to boot from
-base_img = img1, img2, img3, img4
+base_imgs = img1, img2, img3, img4
 
 [client]
 # The http endpoint that the client should talk to 

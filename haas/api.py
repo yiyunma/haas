@@ -460,11 +460,10 @@ def headnode_create(headnode, project, base_img):
     """
 
     valid_imgs = cfg.get('headnode', 'base_imgs')
-    valid_imgs.split(',')
-    valid_imgs = [img.strip() for img in valid_imgs]
+    valid_imgs = [img.strip() for img in valid_imgs.split(',')]
 
     if base_img not in valid_imgs:
-        api.BadArgumentError();        
+        raise BadArgumentError('Provided image is not a valid image.')        
     db = model.Session()
 
     _assert_absent(db, model.Headnode, headnode)
